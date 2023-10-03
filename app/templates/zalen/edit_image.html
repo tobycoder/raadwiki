@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="w-full lg:w-1/2 my-6 pr-0 lg:pr-2 p-20">
+    <p class="text-xl pb-6 flex items-center">
+        <i class="fas fa-list mr-3"></i> Afbeelding raadzaal
+    </p>
+    <div class="leading-loose">
+        <form class="p-10 bg-white rounded shadow-xl" action="{{ url_for('zalen.edit_afbeelding', id=id) }}" method="post">
+          {% for x in obj %}
+          <div class="mt-2">
+            {{ form.afbeelding_url.label(class="block text-sm text-gray-600") }}
+            {{ form.afbeelding_url(value=x.to_dict().image_url, class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded") }}
+          </div>
+          {% endfor %}
+          <div class="mt-2">
+            {{ form.submit(class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded") }}
+            {{ form.csrf_token }}
+          </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

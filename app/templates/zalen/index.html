@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="w-full mt-12 p-9">
+    <p class="text-xl pb-3 flex items-center">
+        <i class="fas fa-list mr-3"></i> Raadzalen
+    </p>
+    <div class="bg-white overflow-auto">
+        <table class="min-w-full bg-white">
+            <thead class="bg-gray-800 text-white">
+                <tr>
+                    <th class="w-1/5 text-left py-3 px-4 uppercase font-semibold text-sm">Gemeente</th>
+                    <th class="w-1/5 text-left py-3 px-4 uppercase font-semibold text-sm">Raadsleden</th>
+                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Burgemeester</th>
+                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Laatst geupdated</th>
+                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Acties</th>
+                </tr>
+            </thead>
+            <tbody class="text-gray-700">
+            {% for x in data %}
+                <tr>
+                    <td class="w-1/5 text-left py-3 px-4"><a href="{{ url_for('zalen.single_post', id=x.id) }}">{{ x.to_dict().gemeente }}</a></td>
+                    <td class="w-1/5 text-left py-3 px-4">{{ x.to_dict().raadsleden }}</td>
+                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:622322662">{{ x.to_dict().bg }}</a></td>
+                    <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com">{{ x.to_dict().bg_update.strftime('%d %B %Y') }}</a></td>
+                    <td class="text-left py-3 px-4"><a href="{{ url_for('zalen.edit_gegevens', id=x.id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Edit</a><a href="{{ url_for('zalen.delete_raadzaal', id=x.id) }}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Delete</a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

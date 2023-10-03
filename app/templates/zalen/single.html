@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="flex flex-wrap mt-6 p-20">
+    <div class="w-full lg:w-1/2 pr-0 lg:pr-2">
+        <p class="text-xl pb-3 flex items-center">
+            <i class="fas fa-plus mr-3"></i> Foto van de raadzaal
+        </p>
+        <div class="p-6 bg-white">
+            {% for op in foto %}
+            <img src="{{ op.to_dict().image_url }}">
+            {% endfor %}
+        </div>
+    </div>
+    <div class="w-full lg:w-1/2 pl-0 lg:pl-2 mt-12 lg:mt-0">
+        <p class="text-xl pb-3 flex items-center">
+            <i class="fas fa-check mr-3"></i> Gegevens
+        </p>
+        <div class="p-6 bg-white">
+            <div class="bg-white overflow-auto">
+                <table class="text-left w-full border-collapse"> <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
+                    <tbody>
+                        <tr class="hover:bg-grey-lighter">
+                            <td class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Gemeente</td>
+                            <td class="py-4 px-6 border-b border-grey-light">{{ data.gemeente }}</td>
+                        </tr>
+                        <tr class="hover:bg-grey-lighter">
+                            <td class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-lightt">Raadsleden</td>
+                            <td class="py-4 px-6 border-b border-grey-light">{{ data.raadsleden }}</td>
+                        </tr>
+                        <tr class="hover:bg-grey-lighter">
+                            <td class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Burgemeester</td>
+                            <td class="py-4 px-6 border-b border-grey-light">{{ data.bg }}</td>
+                        </tr>
+                        <tr class="hover:bg-grey-lighter">
+                            <td class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Laatste update</td>
+                            <td class="py-4 px-6 border-b border-grey-light">{{ data.updated.strftime('%d %B %Y') }}</td>
+                        </tr>
+                        <tr class="hover:bg-grey-lighter">
+                            <td class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Bewerk</td>
+                            <td class="py-4 px-6 border-b border-grey-light"><a href="{{ url_for('zalen.edit_gegevens', id=id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Bewerk</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
