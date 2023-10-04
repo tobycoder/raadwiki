@@ -21,6 +21,59 @@
             {{ form.burgemeester(value=obj.bg, class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded") }}
             </div>
             <div class="mt-2">
+            {{ form.opstelling.label(class="block text-sm text-gray-600") }}
+                <select name="opstelling" class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded">
+                    {% for value in c_opstelling %}
+                    <option value="{{ value[0] }}" autocomplete="off" class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded"{{ 'selected=selected' if obj.opstelling == value[0] }}>{{ value[0] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mt-2">
+            {{ form.college.label(class="block text-sm text-gray-600") }}
+                <select name="college" class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded">
+                    {% for value in c_college %}
+                    <option value="{{ value[0] }}" autocomplete="off" class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded"{{ 'selected=selected' if obj.college == value[0] }}>{{ value[0] }}</option>
+                    {% endfor %}
+                </select>
+
+            </div>
+            <div class="mt-2">
+            {{ form.spreekgestoelte.label(class="block text-sm text-gray-600") }}
+                <select name="spreekgestoelte" class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded">
+                    {% for value in c_spreekgestoelte %}
+                    <option value="{{ value[0] }}" autocomplete="off" class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded"{{ 'selected=selected' if obj.spreekgestoelte == value[0] }}>{{ value[0] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mt-2">
+            {{ form.interrupties.label(class="block text-sm text-gray-600") }}
+                <select name="interrupties" class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded">
+                    {% for value in c_interrupties %}
+                    <option value="{{ value[0] }}" autocomplete="off" class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded"{{ 'selected=selected' if obj.interrupties == value[0] }}>{{ value[0] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mt-2">
+            {{ form.publiek.label(class="block text-sm text-gray-600") }}
+                <select name="publiek" class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded">
+                    {% for value in c_publiek %}
+                    <option value="{{ value[0] }}" autocomplete="off" class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded"{{ 'selected=selected' if obj.publiek == value[0] }}>{{ value[0] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mt-2">
+            {{ form.publiek_positie.label(class="block text-sm text-gray-600") }}
+                <select name="publiek_positie" class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded">
+                    {% for value in c_publiek_positie %}
+                    <option value="{{ value[0] }}" autocomplete="off" class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded"{{ 'selected=selected' if obj.publiek_positie == value[0] }}>{{ value[0] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mt-2">
+            {{ form.capaciteit.label(class="block text-sm text-gray-600") }}
+            {{ form.capaciteit(value=obj.capaciteit, class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded") }}
+            </div>
+            <div class="mt-2">
             {{ form.submit(class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded") }}
             {{ form.csrf_token }}
             </div>
