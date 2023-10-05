@@ -1,5 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
+    <table class="bg-white">
+        <thead>
+            <tr>
+                <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Opstelling</th>
+                <th class="text-left py-3 px-4 uppercase font-semibold text-sm">College</th>
+                <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Spreekgestoelte</th>
+                <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Interrupties</th>
+                <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Publiek</th>
+                <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Publiek Positie</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <form name="filterForm" method="post" action="{{ url_for('viewer.filter') }}">
+                <th class="text-left py-3 px-4">{{ filter_form.opstelling(class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded") }}</th>
+                <th class="text-left py-3 px-4">{{ filter_form.college(class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded") }}</th>
+                <th class="text-left py-3 px-4">{{ filter_form.spreekgestoelte(class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded") }}</th>
+                <th class="text-left py-3 px-4">{{ filter_form.interrupties(class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded") }}</th>
+                <th class="text-left py-3 px-4">{{ filter_form.publiek(class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded") }}</th>
+                <th class="text-left py-3 px-4">{{ filter_form.publiek_positie(class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded") }}</th>
+                <th class="text-left py-3 px-4">{{ filter_form.submit(class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded") }}</th>
+                {{ filter_form.csrf_token }}
+                </form>
+            </tr>
+        </tbody>
+    </table>
 <div class="grid grid-cols-4 gap-4 p-20">
 {% for x in rz %}
 <article class="flex flex-col shadow my-4">
