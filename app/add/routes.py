@@ -10,7 +10,10 @@ def index():
     if request.method == 'POST':
         cap = request.form.get('capaciteit')
         rad = request.form.get('raadsleden')
-        per = round((cap / rad) * 100, 0)
+        if cap and rad:
+            per = round((cap / rad) * 100, 0)
+        else:
+            per = 0
         data = {
             'gemeente': request.form.get('gemeente'),
             'raadsleden': request.form.get('raadsleden'),
@@ -28,7 +31,7 @@ def index():
         }
         obj = raadzalen.add(data)
         rz_id = obj[1].id
-        return redirect(url_for('add.add_image', id=rz_id))
+        return redirect(url_for('zalen.edit_gegevens', id=rz_id))
     return render_template('add/gegevens.html', form=form_post)
 
 @bp.route('/<id>/afbeelding', methods=['POST', 'GET'])

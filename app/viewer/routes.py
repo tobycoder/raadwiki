@@ -30,10 +30,10 @@ def filter():
     if opstelling != '':
         filter_list.append(f_1)
 
-    if college != '':
+    if spreekgestoelte != '':
         filter_list.append(f_2)
 
-    if spreekgestoelte != '':
+    if college != '':
         filter_list.append(f_3)
 
     if interrupties != '':
@@ -45,7 +45,7 @@ def filter():
     if publiek_hoogte != '':
         filter_list.append(f_6)
 
-    if len(filter_list) == 0:
+    if filter_list.count('') == 0:
         query = raadzalen.order_by("gemeente", direction=firestore.Query.ASCENDING).get()
 
     elif len(filter_list) > 0:

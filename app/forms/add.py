@@ -51,15 +51,15 @@ c_publiek_positie = [
 ]
 class addPost(FlaskForm):
     gemeente = StringField('Gemeente', validators=[DataRequired()])
-    burgemeester = StringField('Burgemeester', validators=[DataRequired()])
-    raadsleden = IntegerField('Aantal raadsleden', validators=[DataRequired()])
-    opstelling = SelectField('Opstelling', choices=c_opstelling, validators=[DataRequired()])
-    college = SelectField('Plaats college', choices=c_college, validators=[DataRequired()])
-    spreekgestoelte = SelectField('Spreekgestoelte', choices=c_spreekgestoelte, validators=[DataRequired()])
-    interrupties = SelectField('Interrupties', choices=c_interrupties, validators=[DataRequired()])
-    publiek = SelectField('Publieke ruimte', choices=c_publiek ,validators=[DataRequired()])
-    publiek_positie = SelectField('Hoogte publiek', choices=c_publiek_positie, validators=[DataRequired()])
-    capaciteit = IntegerField('Capaciteit', validators=[DataRequired()])
+    burgemeester = StringField('Burgemeester')
+    raadsleden = IntegerField('Aantal raadsleden')
+    opstelling = SelectField('Opstelling', choices=c_opstelling)
+    college = SelectField('Plaats college', choices=c_college)
+    spreekgestoelte = SelectField('Spreekgestoelte', choices=c_spreekgestoelte)
+    interrupties = SelectField('Interrupties', choices=c_interrupties)
+    publiek = SelectField('Publieke ruimte', choices=c_publiek)
+    publiek_positie = SelectField('Hoogte publiek', choices=c_publiek_positie)
+    capaciteit = IntegerField('Capaciteit')
     submit = SubmitField('Submit')
 
 class addImage(FlaskForm):

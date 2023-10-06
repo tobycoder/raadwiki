@@ -1,10 +1,11 @@
-from flask import render_template, redirect, url_for, request
+from flask import render_template, redirect, url_for, request, flash
 from app.zalen import bp
 from app.authentication import raadzalen, raadzalen_afbeeldingen
 from google.cloud.firestore import FieldFilter
 from firebase_admin import firestore
 from app.forms.add import addPost, addImage, c_opstelling, c_college, c_spreekgestoelte, c_interrupties, c_publiek, c_publiek_positie
 from datetime import datetime
+import fnmatch
 
 @bp.route('/')
 def index():
@@ -21,11 +22,19 @@ def single_post(id):
 @bp.route('/<id>/edit', methods=['POST', 'GET'])
 def edit_gegevens(id):
     form_post = addPost()
+    form_f = addImage()
     obj = raadzalen.document(id).get()
+    obj2 = raadzalen_afbeeldingen.where("rz_referentie", "==", "/raadzalen/" + id).limit(1).get()
+    reference = '/raadzalen/' + str(id)
+    foto = raadzalen_afbeeldingen.where('rz_referentie', '==', reference).get()
+    data2 = raadzalen.document(id).get()
     if request.method == 'POST':
         cap = int(request.form.get('capaciteit'))
         rad = int(request.form.get('raadsleden'))
-        per = round((cap/rad) * 100, 0)
+        if cap and rad != None:
+            per = round((cap/rad) * 100, 0)
+        else:
+            per = 0
         data = {
             'gemeente': request.form.get('gemeente'),
             'raadsleden': request.form.get('raadsleden'),
@@ -42,21 +51,32 @@ def edit_gegevens(id):
             'capaciteit_percentage': per
         }
         update = raadzalen.document(id).update(data)
-        return redirect(url_for('zalen.edit_afbeelding', id=id))
-    return render_template('zalen/edit.html', form=form_post, obj=obj.to_dict(), id=id, c_opstelling=c_opstelling, c_college=c_college, c_spreekgestoelte=c_spreekgestoelte, c_interrupties=c_interrupties, c_publiek=c_publiek, c_publiek_positie=c_publiek_positie)
+        flash('Je wijzigingen zijn succesvol opgeslagen!')
+        return redirect(url_for('zalen.edit_gegevens', id=id))
+    return render_template('zalen/edit_2.html', form=form_post, data=data2.to_dict(), form_f=form_f, obj=obj.to_dict(), obj2=obj2, id=id, c_opstelling=c_opstelling, c_college=c_college, c_spreekgestoelte=c_spreekgestoelte, c_interrupties=c_interrupties, c_publiek=c_publiek, c_publiek_positie=c_publiek_positie, foto=foto)
 
 @bp.route('/<id>/edit_afbeelding', methods=['POST', 'GET'])
 def edit_afbeelding(id):
     form_afbeelding = addImage()
     obj = raadzalen_afbeeldingen.where("rz_referentie", "==", "/raadzalen/" + id).limit(1).get()
-    if request.method == 'POST':
+    if request.method == 'POST' and len(obj) > 0:
         data = {
             'image_url': request.form.get('afbeelding_url'),
             'rz_referentie': '/raadzalen/' + id
         }
         update = raadzalen_afbeeldingen.document(obj[0].id).update(data)
-        return redirect(url_for('zalen.index'))
-    return render_template('zalen/edit_image.html', form=form_afbeelding, obj=obj, id=id)
+        flash('Afbeelding succesvol opgeslagen!')
+        return redirect(url_for('zalen.edit_gegevens', id=id))
+    elif len(obj) == 0 and request.method == 'POST':
+        data = {
+            'image_url': request.form.get('afbeelding_url'),
+            'rz_referentie': '/raadzalen/' + id
+        }
+        raadzalen_afbeeldingen.add(data)
+        return redirect(url_for('zalen.edit_gegevens', id=id))
+    else:
+        return str(len(obj))
+    #return render_template('zalen/edit_image.html', form=form_afbeelding, obj=obj, id=id)
 
 @bp.route('/<id>/delete', methods=['POST', 'GET'])
 def delete_raadzaal(id):

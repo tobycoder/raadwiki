@@ -18,7 +18,7 @@
             <tbody class="text-gray-700">
             {% for x in data %}
                 <tr>
-                    <td class="w-1/5 text-left py-3 px-4"><a href="{{ url_for('zalen.single_post', id=x.id) }}">{{ x.to_dict().gemeente }}</a></td>
+                    <td class="w-1/5 text-left py-3 px-4"><a href="{{ url_for('zalen.edit_gegevens', id=x.id) }}">{{ x.to_dict().gemeente }}</a></td>
                     <td class="w-1/5 text-left py-3 px-4">{{ x.to_dict().raadsleden }}</td>
                     <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="tel:622322662">{{ x.to_dict().bg }}</a></td>
                     <td class="text-left py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com">{{ x.to_dict().bg_update.strftime('%d %B %Y') }}</a></td>
