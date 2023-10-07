@@ -1,3 +1,5 @@
+import os
+
 from app.auth import bp
 from firebase_admin.auth import UserRecord
 from app.authentication import fb
@@ -8,8 +10,9 @@ from flask_mail import Mail, Message
 import requests
 import json
 from app import mail
+import os
 
-FIREBASE_WEB_API_KEY = "AIzaSyAE9eQ9xTvwIIAohWLMkLl--YR89VshWsg"
+FIREBASE_WEB_API_KEY = os.environ.get('FIREBASE_WEB_API_KEY')
 rest_api_url = f"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword"
 
 @bp.route('/register', methods=['POST', 'GET'])
@@ -67,7 +70,4 @@ def logout():
         return redirect(url_for('auth.rw_login_user'))
     else:
         return redirect(url_for('auth.rw_login_user'))
-
-#export GOOGLE_APPLICATION_CREDENTIALS=/app/raadzaalwiki-firebase-adminsdk-mun9y-a8eac2ba13.json
-#https://raadzaalwiki.firebaseapp.com/__/auth/handler
 
