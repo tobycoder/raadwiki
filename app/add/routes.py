@@ -3,8 +3,10 @@ from app.forms.add import addPost, addImage, c_opstelling, c_college, c_spreekge
 from flask import request, redirect, url_for, render_template
 from app.authentication import raadzalen, raadzalen_afbeeldingen
 from datetime import datetime
+from app.auth.decorators import login_required
 
 @bp.route('/', methods=['POST', 'GET'])
+@login_required
 def index():
     form_post = addPost()
     if request.method == 'POST':
@@ -35,6 +37,7 @@ def index():
     return render_template('add/gegevens.html', form=form_post)
 
 @bp.route('/<id>/afbeelding', methods=['POST', 'GET'])
+@login_required
 def add_image(id):
     form_image = addImage()
     if request.method == 'POST':
