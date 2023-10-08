@@ -15,8 +15,8 @@ app = Flask(__name__)
 app.config.from_object(Config)
 app.config['MAIL_SERVER']='smtp.transip.email'
 app.config['MAIL_PORT'] = 465
-app.config['MAIL_USERNAME'] = 'info@raadwiki.nl'
-app.config['MAIL_PASSWORD'] = 'Ilgddd@2309!'
+app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 mail = Mail(app)
