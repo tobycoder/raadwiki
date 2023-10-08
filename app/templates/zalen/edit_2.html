@@ -20,14 +20,14 @@
         </ul>
       {% endif %}
     {% endwith %}
-<div class="flex flex-wrap px-20 py-6">
+<div class="flex flex-wrap justify-center inline px-20 py-6 space-x-8">
 <div class="invisible bg-teal-100"></div>
-    <div class="w-full lg:w-1/2 pr-0 lg:pr-2 ">
+    <div class="w-2/5 inline space-x-2 p-4 lg:pr-2 border-b bg-white dark:border-gray-700 shadow-md sm:rounded-lg">
         <p class="text-xl pb-3 flex items-center">
             <i class="fas fa-plus mr-3"></i> Foto van de raadzaal
         </p>
         <div class="p-6 bg-white">
-            <form class="p-10 bg-white rounded shadow-xl" action="{{ url_for('zalen.edit_afbeelding', id=id) }}" method="post">
+            <form class="" action="{{ url_for('zalen.edit_afbeelding', id=id) }}" method="post">
             {% for op in foto %}
             <img src="{{ op.to_dict().image_url }}">
             {% endfor %}
@@ -51,7 +51,7 @@
             </form>
         </div>
     </div>
-    <div class="w-full lg:w-1/2 pl-0 lg:pl-2 mt-12 lg:mt-0">
+    <div class="w-2/5 inline space-x-2 p-4 lg:pr-2 border-b bg-white dark:border-gray-700 shadow-md sm:rounded-lg">
         <p class="text-xl pb-3 flex items-center">
             <i class="fas fa-check mr-3"></i> Gegevens
         </p>

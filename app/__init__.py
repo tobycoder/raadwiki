@@ -38,6 +38,9 @@ app.register_blueprint(viewer_bp, url_prefix='/viewer')
 from app.auth import bp as auth_bp
 app.register_blueprint(auth_bp, url_prefix='/auth')
 
+from app.renovaties import bp as reno_bp
+app.register_blueprint(reno_bp, url_prefix='/renovaties')
+
 @app.route('/')
 def test_page():
     return redirect(url_for('zalen.index'))
