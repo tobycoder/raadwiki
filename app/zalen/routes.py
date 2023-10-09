@@ -94,6 +94,8 @@ def edit_afbeelding(id):
 def delete_raadzaal(id):
     delete_gegevens = raadzalen.document(id).delete()
     delete_afbeeldingen = raadzalen_afbeeldingen.where('rz_referentie', '==', '/raadzalen/' + id).get()
+    for x in delete_afbeeldingen:
+        raadzalen_afbeeldingen.document(x.id).delete()
     return redirect(url_for('zalen.index'))
 
 @bp.route('/search/<keyword>', methods=['POST', 'GET'])
