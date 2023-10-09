@@ -22,12 +22,12 @@ def rw_create_user():
         display_name = request.form.get('display_name')
         email = request.form.get('email')
         password = request.form.get('password')
-        msg = Message(subject='Nieuwe registratie', sender='info@raadwiki.nl', recipients=['floris@florisdeboer.com'])
+        msg = Message(subject='Nieuwe registratie', sender='florisblog.com@gmail.com', recipients=['floris@florisdeboer.com'])
         msg.body = "Er is een nieuwe registratie. Graag goedkeuren."
         mail.send(msg)
         try:
             auth.create_user(email=email, password=password, display_name=display_name, disabled=True)
-            msg = Message(subject='We gaan je registratie bekijken', sender='info@raadwiki.nl', recipients=[email])
+            msg = Message(subject='We gaan je registratie bekijken', sender='florisblog.com@gmail.com', recipients=[email])
             msg.body = "Alvast van harte welkom " + display_name + " en leuk dat je mee wil helpen! Een beheerder gaat je aanvraag zometeen goedkeuren. Je ontvangt dan nader bericht."
             mail.send(msg)
             return render_template('auth/approval.html')
@@ -59,7 +59,7 @@ def rw_login_user():
         else:
             flash('Welkom, ' + email)
             session['user'] = email
-            return redirect(url_for('zalen.index'))
+            return redirect(url_for('dashboard.index'))
 
     return render_template('auth/login.html', form=form)
 

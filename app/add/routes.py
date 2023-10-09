@@ -1,6 +1,6 @@
 from app.add import bp
 from app.forms.add import addPost, addImage, c_opstelling, c_college, c_spreekgestoelte, c_interrupties, c_publiek_positie, c_publiek
-from flask import request, redirect, url_for, render_template
+from flask import request, redirect, url_for, render_template, session
 from app.authentication import raadzalen, raadzalen_afbeeldingen
 from datetime import datetime
 from app.auth.decorators import login_required
@@ -29,7 +29,8 @@ def index():
             'publiek': request.form.get('publiek'),
             'publiek_positie': request.form.get('publiek_positie'),
             'capaciteit': request.form.get('capaciteit'),
-            'capaciteit_percentage': per
+            'capaciteit_percentage': per,
+            'auteur': session['user']
         }
         obj = raadzalen.add(data)
         rz_id = obj[1].id

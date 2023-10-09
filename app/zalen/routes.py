@@ -13,6 +13,12 @@ def index():
     data = raadzalen.order_by("gemeente", direction=firestore.Query.ASCENDING).stream()
     return render_template('zalen/index.html', data=data)
 
+@bp.route('/personal')
+@login_required
+def personal():
+    data = raadzalen.where(filter=FieldFilter('auteur', '==', session['user'])).get()
+    return render_template('zalen/index.html', data=data, personal=True, dynamic_title="raadzalen")
+
 @bp.route('/<id>', methods=['POST', 'GET'])
 @login_required
 def single_post(id):
@@ -32,10 +38,10 @@ def edit_gegevens(id):
     foto = raadzalen_afbeeldingen.where('rz_referentie', '==', reference).get()
     data2 = raadzalen.document(id).get()
     if request.method == 'POST':
-        cap = int(request.form.get('capaciteit'))
-        rad = int(request.form.get('raadsleden'))
+        cap = request.form.get('capaciteit')
+        rad = request.form.get('raadsleden')
         if cap and rad != None:
-            per = round((cap/rad) * 100, 0)
+            per = round((int(cap)/int(rad)) * 100, 0)
         else:
             per = 0
         data = {
@@ -51,7 +57,8 @@ def edit_gegevens(id):
             'publiek': request.form.get('publiek'),
             'publiek_positie': request.form.get('publiek_positie'),
             'capaciteit': request.form.get('capaciteit'),
-            'capaciteit_percentage': per
+            'capaciteit_percentage': per,
+            'auteur': session['user']
         }
         update = raadzalen.document(id).update(data)
         flash('Je wijzigingen zijn succesvol opgeslagen!')
@@ -89,3 +96,7 @@ def delete_raadzaal(id):
     delete_afbeeldingen = raadzalen_afbeeldingen.where('rz_referentie', '==', '/raadzalen/' + id).get()
     return redirect(url_for('zalen.index'))
 
+@bp.route('/search/<keyword>', methods=['POST', 'GET'])
+@login_required
+def search(keyword):
+    query = raadzalen.where('')

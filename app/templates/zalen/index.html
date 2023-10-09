@@ -3,10 +3,15 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css"  rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
 
-<section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5">
+<section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 h-screen pt-10">
     <div class="mx-auto max-w-screen-xl">
         <!-- Start coding here -->
         <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
+            {% if personal %}
+            <p class="text-xl pb-3 flex items-center p-6">
+                <i class="fas fa-check mr-3"></i> Jouw raadzalen:
+            </p>
+            {% endif %}
             <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                 <div class="w-full md:w-1/2">
                     <form class="flex items-center">
