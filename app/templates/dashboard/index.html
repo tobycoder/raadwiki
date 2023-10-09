@@ -1,5 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
+<div class="p-6">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class=flashes>
+        {% for message in messages %}
+          <div class="py-2">
+            <div style="background-color: #C1E1C1 !important; border-color: #6CBF6C;" class="border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md bg-green" role="alert">
+              <div class="flex">
+                <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z"/></svg></div>
+                <div>
+                  <p class="font-bold">Gelukt!</p>
+                  <p class="text-sm">{{ message }}</p>
+                    <a href="{{ url_for('zalen.index') }}">Terug naar overzicht</a>
+                </div>
+              </div>
+            </div>
+            </div>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+</div>
 <div class="grid grid-cols-2 gap-4 p-6">
     <div class="p-4 lg:pr-2 border-b bg-white dark:border-gray-700 shadow-md sm:rounded-lg">
         <p class="text-xl pb-3 flex items-center">
@@ -107,7 +130,7 @@
             {% endfor %}
             </tbody>
         </table>
-        <div class="grid grid-cols-2 gap-4">
+        <div class="grid grid-cols-2 gap-4 justify-self-end">
         <a href="{{ url_for('renovaties.add') }}" style="background-color: blue; margin-top: 10px;" type="button" class="flex items-center justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800">
             <svg class="h-3.5 w-3.5 mr-2" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path clip-rule="evenodd" fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
