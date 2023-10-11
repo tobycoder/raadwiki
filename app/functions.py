@@ -46,7 +46,3 @@ def count_renovaties_by_user(email):
     results = aggregate_query.get()
     return results
 
-def upload_file_and_get_url(dest_filename, source_filename):
-    blob = bucket.blob(dest_filename)
-    upload = blob.upload_from_filename(source_filename)
-    return True

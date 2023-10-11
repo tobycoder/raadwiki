@@ -32,7 +32,6 @@ def rw_create_user():
         # Set UUID
         avatar_path = str(uuid.uuid1()) + "_" + avatar_name
         avatar.save(os.path.join(app.config['UPLOAD_FOLDER'], avatar_path))
-        upload_file_and_get_url(avatar_path, os.path.join(app.config['UPLOAD_FOLDER'], avatar_path))
         user = auth.create_user(email=email, password=password, display_name=display_name, disabled=True, photo_url=os.environ.get('SITE_BASE_URL') + "/" + app.config['UPLOAD_FOLDER_STATIC'] + "/" + avatar_path)
         msg = Message(subject='We gaan je registratie bekijken', sender=master_email, recipients=[email])
         msg.body = "Alvast van harte welkom " + display_name + " en leuk dat je mee wil helpen! Een beheerder gaat je aanvraag zometeen goedkeuren. Je ontvangt dan nader bericht."
@@ -138,7 +137,6 @@ def edit_profile():
         # Set UUID
         avatar_path = str(uuid.uuid1()) + "_" + avatar_name
         avatar.save(os.path.join(app.config['UPLOAD_FOLDER'], avatar_path))
-        upload_file_and_get_url(avatar_path, os.path.join(app.config['UPLOAD_FOLDER'], avatar_path))
         user = auth.update_user(user_id.uid,
                                 email=email,
                                 password=password,
