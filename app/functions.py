@@ -1,4 +1,4 @@
-from app.authentication import raadzalen, raadzalen_afbeeldingen, renovaties, bucket
+from app.authentication import raadzalen, raadzalen_afbeeldingen, renovaties
 from flask import session
 from google.cloud import firestore
 from google.cloud.firestore_v1 import aggregation

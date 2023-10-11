@@ -11,7 +11,6 @@ import os
 from app.auth.decorators import master_required, login_required
 from werkzeug.utils import secure_filename
 import uuid as uuid
-from app.functions import upload_file_and_get_url
 from app.authentication import raadzalen, renovaties, messages, replies
 from google.cloud.firestore import FieldFilter
 
