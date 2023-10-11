@@ -140,10 +140,10 @@ def edit_profile():
                                 email=email,
                                 password=password,
                                 display_name=display_name,
-                                disabled=True,
+                                disabled=False,
                                 photo_url=os.environ.get('SITE_BASE_URL') + "/" + app.config['UPLOAD_FOLDER_STATIC'] + "/" + avatar_path
                                 )
-        return redirect(url_for('dashboard.index'))
+        return redirect(url_for('auth.edit.profile'))
     else:
         return render_template('auth/edit_profile.html', form=form, user_id=user_id)
 
@@ -207,3 +207,7 @@ def get_user_id():
             return {'global_user_id': 'none'}
     else:
         return {'global_user_id': 'none'}
+
+@app.context_processor
+def get_global_url():
+    return {'SITE_BASE_URL' : os.environ.get('SITE_BASE_URL')}
