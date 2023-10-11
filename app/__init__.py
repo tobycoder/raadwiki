@@ -2,6 +2,8 @@ from flask import Flask, session, redirect, url_for
 from flask_wtf import CSRFProtect
 import os
 from flask_mail import Mail
+from os.path import join, dirname, realpath
+import firebase_admin
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -10,9 +12,12 @@ class Config:
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URI')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-
+UPLOAD_FOLDER = join(dirname(realpath(__file__)), 'static/images')
+UPLOAD_FOLDER_STATIC = 'static/images'
 app = Flask(__name__)
 app.config.from_object(Config)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['UPLOAD_FOLDER_STATIC'] = UPLOAD_FOLDER_STATIC
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
@@ -21,6 +26,7 @@ app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False
 mail = Mail(app)
 # Initialize Flask extensions here
+
 app.app_context().push()
 CSRFProtect(app)
 
@@ -44,15 +50,10 @@ app.register_blueprint(reno_bp, url_prefix='/renovaties')
 from app.dashboard import bp as dashboard_bp
 app.register_blueprint(dashboard_bp, url_prefix='/dashboard')
 
+from app.master import bp as master_bp
+app.register_blueprint(master_bp, url_prefix='/master')
+
 @app.route('/')
 def test_page():
     return redirect(url_for('zalen.index'))
 
-@app.context_processor
-def utility_processor():
-    def login_check():
-        if('user' in session):
-            return {'logged_in': True}
-        else:
-            return {'logged_in': False}
-    return login_check()
