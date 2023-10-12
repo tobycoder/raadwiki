@@ -8,6 +8,7 @@ from app.forms.login import registerForm
 from flask_mail import Message
 from app import mail
 from app.functions import count_raadzalen_by_user, count_renovaties_by_user
+from app.authentication import messages
 
 send_master = os.environ.get('MAIL_USERNAME')
 master_email = os.environ.get('MASTER_EMAIL')
@@ -59,6 +60,20 @@ def approve(id):
         return redirect(url_for('master.index'))
     return redirect(url_for('master.index'))
 
+
+@bp.route('/bericht-naar-allen')
+@master_required
+@login_required
+def bericht_naar_allen():
+
+    if request.method == 'POST':
+        data = {
+            'from': session['user'],
+            'to': 'notification',
+            'content': request.form.get('content'),
+            'subject': request.form.get('subject'),
+        }
+        messages.add(data)
 @bp.route('/<id>/delete')
 @master_required
 @login_required
