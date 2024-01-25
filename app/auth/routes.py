@@ -62,7 +62,7 @@ def rw_login_user():
                           data=payload)
         callback = r.json()
         if "error" in callback:
-            flash("Je hebt waarschijnlijk verkeerde gegevens ingevuld. Probeer opnieuw.")
+            flash("Je hebt waarschijnlijk verkeerde gegevens ingevuld. Probeer opnieuw." + str(callback))
             return render_template('auth/login.html', form=form)
         else:
             flash('Welkom, ' + email)
