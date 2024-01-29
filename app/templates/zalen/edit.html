@@ -74,8 +74,8 @@
             {{ form.capaciteit(value=obj.capaciteit, class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded") }}
             </div>
             <div class="mt-2">
+                            {{ form.csrf_token }}
             {{ form.submit(class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded") }}
-            {{ form.csrf_token }}
             </div>
         </form>
     </div>
