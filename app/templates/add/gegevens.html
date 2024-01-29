@@ -106,8 +106,8 @@
                         </tr>
                         <tr class="hover:bg-grey-lighter">
                             <td class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Bewerk</td>
-                            <td class="py-4 px-6 border-b border-grey-light">{{ form.submit(class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded") }}
-            {{ form.csrf_token }}</td>
+                            <td class="py-4 px-6 border-b border-grey-light">{{ form.csrf_token }}{{ form.submit(class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded") }}
+            </td>
                         </tr>
                         </form>
                     </tbody>
