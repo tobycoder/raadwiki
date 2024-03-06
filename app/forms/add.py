@@ -1,6 +1,7 @@
 from wtforms import StringField, TextAreaField, SubmitField, SelectField, PasswordField, IntegerField
 from wtforms.validators import DataRequired
 from flask_wtf import FlaskForm
+from firebase_admin import auth
 
 c_opstelling = [
     ('', ''),
@@ -49,6 +50,10 @@ c_publiek_positie = [
     ('Verhoogd', 'Verhoogd'),
     ('Contact mogelijk', 'Contact mogelijk')
 ]
+
+userlist = [x.email for x in auth.list_users().iterate_all()]
+
+
 class addPost(FlaskForm):
     gemeente = StringField('Gemeente', validators=[DataRequired()])
     burgemeester = StringField('Burgemeester')
@@ -60,6 +65,7 @@ class addPost(FlaskForm):
     publiek = SelectField('Publieke ruimte', choices=c_publiek)
     publiek_positie = SelectField('Hoogte publiek', choices=c_publiek_positie)
     capaciteit = IntegerField('Capaciteit')
+    assigned = SelectField('assigned', choices=userlist)
     submit = SubmitField('Submit')
 
 class addImage(FlaskForm):

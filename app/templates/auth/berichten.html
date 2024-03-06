@@ -46,7 +46,7 @@
         <form action="{{ url_for('auth.reply', id=id) }}" method="post" name="replyForm">
         <textarea name="content" id="content" class="w-full bg-gray-50 p-2 rounded-xl" placeholder="Type your reply here..." rows="3"></textarea>
         <div class="flex items-center justify-between p-2">
-                    {{ form.csrf_token }}
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
           <button type="submit" class="bg-purple-600 text-white px-6 py-2 rounded-xl">Reply</button>
         </div>
         </form>

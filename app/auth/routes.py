@@ -13,6 +13,7 @@ from werkzeug.utils import secure_filename
 import uuid as uuid
 from app.authentication import raadzalen, renovaties, messages, replies
 from google.cloud.firestore import FieldFilter
+from app.functions import count_raadzalen_by_user, count_renovaties_by_user, count_entries
 
 FIREBASE_WEB_API_KEY = os.environ.get('FIREBASE_WEB_API_KEY')
 rest_api_url = f"https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword"
@@ -152,7 +153,9 @@ def edit_profile():
 def bijdragen():
     rz_query = raadzalen.where(filter=FieldFilter('auteur', '==', session['user'])).get()
     ren_query = renovaties.where(filter=FieldFilter('auteur', '==', session['user'])).get()
-    return render_template('auth/bijdragen.html', rz_query=rz_query, ren_query=ren_query)
+    count = count_raadzalen_by_user(session['user'])
+    count_ren = count_renovaties_by_user(session['user'])
+    return render_template('auth/bijdragen.html', count=count, count_ren=count_ren, rz_query=rz_query, ren_query=ren_query)
 
 @bp.route('/berichten')
 @login_required

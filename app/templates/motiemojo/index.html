@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="p-5">
+    <form action="{{ url_for('motiemojo.motie') }}" method="post">
+{{ form.titel_motie(class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded") }}
+{{ form.agendapunt_motie(class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded") }}
+{{ form.constaterende(class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded") }}
+{{ form.overwegende(class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded") }}
+{{ form.uitspraak_titel(class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded") }}
+{{ form.uitspraak(class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded") }}
+        {{ form.csrf_token }}
+{{ form.submit }}
+        </form>
+</div>
+    {% endblock %}

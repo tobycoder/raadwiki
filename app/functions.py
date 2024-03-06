@@ -30,7 +30,10 @@ def count_raadzalen_by_user(email):
     aggregate_query.count(alias="all")
 
     results = aggregate_query.get()
-    return results
+    for result in results:
+        print = result[0].value
+
+    return print
 def count_renovaties_by_user(email):
     """Builds an aggregate query that returns the number of results in the query.
 
@@ -44,5 +47,28 @@ def count_renovaties_by_user(email):
     aggregate_query.count(alias="all")
 
     results = aggregate_query.get()
-    return results
+    for result in results:
+        print = result[0].value
 
+    return print
+
+def count_entries(collection):
+    query = collection.order_by("auteur")
+    aggregate_query = aggregation.AggregationQuery(query)
+    aggregate_query.count(alias="all")
+    results = aggregate_query.get()
+
+    for result in results:
+        print = result[0].value
+
+    return print
+
+def count_entries_query(query):
+    aggregate_query = aggregation.AggregationQuery(query)
+    aggregate_query.count(alias="all")
+    results = aggregate_query.get()
+
+    for result in results:
+        print = result[0].value
+
+    return print

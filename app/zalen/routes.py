@@ -1,17 +1,19 @@
 from flask import render_template, redirect, url_for, request, flash, session
 from app.zalen import bp
 from app.authentication import raadzalen, raadzalen_afbeeldingen
-from google.cloud.firestore import FieldFilter
+from google.cloud.firestore import FieldFilter, Or
 from firebase_admin import firestore
 from app.forms.add import addPost, addImage, c_opstelling, c_college, c_spreekgestoelte, c_interrupties, c_publiek, c_publiek_positie
 from datetime import datetime
 import fnmatch
 from app.auth.decorators import login_required
+from app.functions import count_entries, count_entries_query
 @bp.route('/')
 @login_required
 def index():
     data = raadzalen.order_by("gemeente", direction=firestore.Query.ASCENDING).stream()
-    return render_template('zalen/index.html', data=data)
+    count = count_entries(raadzalen)
+    return render_template('zalen/index.html', data=data, count=count)
 
 @bp.route('/personal')
 @login_required
@@ -102,3 +104,14 @@ def delete_raadzaal(id):
 @login_required
 def search(keyword):
     query = raadzalen.where('')
+
+@bp.route('/to-do/', methods=['POST', 'GET'])
+@login_required
+def index_to_do():
+    title = "Nog te doen:"
+    filter_1 = FieldFilter('bg', '==', None)
+    filter_2 = FieldFilter('bg', '==', 'None')
+    or_filter = Or(filters=[filter_1, filter_2])
+    query = raadzalen.where(filter=or_filter)
+    data = query.stream()
+    return render_template('zalen/index.html', data=data, count=count_entries_query(query), title=title)

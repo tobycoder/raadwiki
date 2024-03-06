@@ -52,8 +52,8 @@
                         <tr class="border-b dark:border-gray-700" {% if x.disabled == true %} style="background-color: #C41E3A; color: white;" {% endif %}>
                             <th scope="row" class="px-4 py-3 font-medium  {% if x.disabled == true %} text-white-500 {% else %} text-gray-500 {% endif %} whitespace-nowrap dark:text-white">{{ x.display_name }}</th>
                             <td class="px-4 py-3">{{ x.email }}</td>
-                            <td class="px-4 py-3">{% for count in count_raadzalen_by_user(x.email) %}{{ count[0].value }}{% endfor %}</td>
-                            <td class="px-4 py-3">{% for count in count_renovaties_by_user(x.email) %}{{ count[0].value }}{% endfor %}</td>
+                            <td class="px-4 py-3">{{ count_raadzalen_by_user(x.email) }}</td>
+                            <td class="px-4 py-3">{{ count_renovaties_by_user(x.email) }}</td>
                             <td class="px-4 py-3">{{ x.uid }}</td>
                             <td class="px-4 py-3 flex items-center justify-end">
                                 <button id="apple-imac-27-dropdown-button-{{ x.uid }}" data-dropdown-toggle="apple-imac-27-dropdown-{{ x.uid }}" class="inline-flex items-center p-0.5 text-sm font-medium text-center hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100" type="button">

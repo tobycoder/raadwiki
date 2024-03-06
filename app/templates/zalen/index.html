@@ -6,9 +6,12 @@
 <section class="bg-gray-50 dark:bg-gray-900 p-3 sm:p-5 h-screen pt-10">
     <div class="mx-auto max-w-screen-xl">
         <!-- Start coding here -->
+        {% if title %}
+        <h1 class="text-4xl font-extrabold dark:text-white p-3">{{ title }}</h1>
+        {% endif %}
         <div class="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
             <p class="text-xl pb-3 flex items-center p-6">
-                <i class="fas fa-check mr-3"></i> {% if personal %}Jouw raadzalen: {% else %} Raadzalen {% endif %}
+                <i class="fas fa-check mr-3"></i> {% if personal %}Jouw raadzalen: {% else %} Raadzalen {{ count }} {% endif %}
             </p>
             <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                 <div class="w-full md:w-1/2">

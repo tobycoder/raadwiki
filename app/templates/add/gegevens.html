@@ -97,6 +97,13 @@
                                 {{ form.capaciteit(class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded", disabled="disabled") }}</td>
                         </tr>
                         <tr class="hover:bg-grey-lighter">
+                            <td class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Positie publiek</td>
+                            <td class="py-4 px-6 border-b border-grey-light">
+                                    {{ form.assigned(class="w-full px-5 py-1 text-gray-700 bg-gray-200 rounded") }}
+                            </td>
+                        </tr>
+
+                        <tr class="hover:bg-grey-lighter">
                             <td class="py-4 px-6 bg-grey-lightest font-bold uppercase text-sm text-grey-dark border-b border-grey-light">Capaciteit percentage</td>
                             <td class="py-4 px-6 border-b border-grey-light">%</td>
                         </tr>

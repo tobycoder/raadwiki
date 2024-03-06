@@ -8,7 +8,8 @@ from app.forms.login import registerForm
 from flask_mail import Message
 from app import mail
 from app.functions import count_raadzalen_by_user, count_renovaties_by_user
-from app.authentication import messages
+from app.authentication import messages, raadzalen, renovaties
+from firebase_admin import firestore
 
 send_master = os.environ.get('MAIL_USERNAME')
 master_email = os.environ.get('MASTER_EMAIL')
@@ -80,3 +81,10 @@ def bericht_naar_allen():
 def delete(id):
     delete = auth.delete_user(id)
     return redirect(url_for('master.index'))
+
+@bp.route('/workload')
+@master_required
+@login_required
+def workload():
+    data = raadzalen.order_by("gemeente", direction=firestore.Query.ASCENDING).stream()
+    return render_template('master/workload.html', data=data)

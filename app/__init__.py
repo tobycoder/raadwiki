@@ -53,6 +53,9 @@ app.register_blueprint(dashboard_bp, url_prefix='/dashboard')
 from app.master import bp as master_bp
 app.register_blueprint(master_bp, url_prefix='/master')
 
+from app.motiemojo import bp as motiemojo_bp
+app.register_blueprint(motiemojo_bp, url_prefix='/motiemojo')
+
 @app.route('/')
 def test_page():
     return redirect(url_for('zalen.index'))
