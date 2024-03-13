@@ -2,3 +2,13 @@ app/key.json
 app/extensions.py
 app/variables
 *.pyc
+/bin/
+/lib/
+/lib64/
+/venv/
+/.~lock.motie_flask_format.docx#
+/.~lock.motie_test_heute.docx#
+/motie_flask_format.docx
+/motie_test_heute.docx
+/pyvenv.cfg
+/motie_lekker.docx
